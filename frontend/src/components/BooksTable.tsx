@@ -23,7 +23,7 @@ interface BooksProps {
   books: Book[];
 }
 
-const BooksTable: React.FC<BooksProps> = ({ books }) => {
+export default function BooksTable({ books }: BooksProps) {
   return (
     <Table
       sx={{
@@ -172,6 +172,4 @@ const BooksTable: React.FC<BooksProps> = ({ books }) => {
       </TableBody>
     </Table>
   );
-};
-
-export default BooksTable;
+}

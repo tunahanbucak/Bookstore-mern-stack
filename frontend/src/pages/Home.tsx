@@ -2,14 +2,15 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Spinner from "../components/Spinner";
 import { Link } from "react-router-dom";
-import { Box, Typography } from "@mui/material";
-
+import { Box, Button, Typography } from "@mui/material";
 import { MdOutlineAddBox } from "react-icons/md";
 import BooksTable from "../components/BooksTable";
+import BooksCard from "../components/BooksCard";
 
 export default function Home() {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [showType, setShowType] = useState("table");
 
   useEffect(() => {
     setLoading(true);
@@ -34,8 +35,31 @@ export default function Home() {
       <Box
         sx={{
           display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: 4,
+        }}>
+        <Button
+          variant={showType === "table" ? "contained" : "outlined"}
+          color="primary"
+          onClick={() => setShowType("table")}
+          sx={{ paddingX: 3, paddingY: 1, borderRadius: 2 }}>
+          Tablo
+        </Button>
+        <Button
+          variant={showType === "card" ? "contained" : "outlined"}
+          color="primary"
+          onClick={() => setShowType("card")}
+          sx={{ paddingX: 3, paddingY: 1, borderRadius: 2 }}>
+          Kart
+        </Button>
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
+          pb: 4,
         }}>
         <Typography
           variant="h1"
@@ -55,7 +79,13 @@ export default function Home() {
           />
         </Link>
       </Box>
-      {loading ? <Spinner /> : <BooksTable books={books} />}
+      {loading ? (
+        <Spinner />
+      ) : showType === "table" ? (
+        <BooksTable books={books} />
+      ) : (
+        <BooksCard books={books} />
+      )}
     </Box>
   );
 }

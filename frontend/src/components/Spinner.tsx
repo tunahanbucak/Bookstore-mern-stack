@@ -10,8 +10,6 @@ export default function Spinner() {
         borderRadius: "50%",
         backgroundColor: "skyblue",
         animation: "pink 1s ease-in-out",
-      }}>
-      <Box></Box>
-    </Box>
+      }}></Box>
   );
 }
